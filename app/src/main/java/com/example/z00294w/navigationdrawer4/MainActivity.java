@@ -1,5 +1,6 @@
 package com.example.z00294w.navigationdrawer4;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,16 +14,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    protected DrawerLayout drawer;
+
+    Fragment fragment = null;
+    Class fragmentClass = null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+       // final Button btnLocation = findViewById(R.id.getLocationBtn);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -31,10 +39,11 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -43,6 +52,13 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+//    public void sendToLocation(View v) {
+//
+//
+//        Intent intent_Location = new Intent(MainActivity.this, LocationClass.class);
+//        startActivity(intent_Location);
+//    }
 
     @Override
     public void onBackPressed() {
@@ -83,19 +99,30 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            Toast.makeText(this,"Hello this is 1",Toast.LENGTH_LONG).show();
-        } else if (id == R.id.nav_gallery) {
-            Toast.makeText(this,"Hello this is 2",Toast.LENGTH_LONG).show();
-        } else if (id == R.id.nav_slideshow) {
+        if (id == R.id.nav_location) {
+            Intent intent=new Intent(MainActivity.this,LocationClass.class);
+            startActivity(intent);
 
-            Intent intent=new Intent(MainActivity.this,Hello.class);
+        } else if (id == R.id.nav_security) {
+
+            Intent intent=new Intent(MainActivity.this,newsAPIView.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_tmsourced) {
+
+            Intent intent=new Intent(MainActivity.this,TM_source.class);
             startActivity(intent);
 
 
-        } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
+
+
+        } //else if (id == R.id.nav_manage) {
+
+       // }
+        else if (id == R.id.nav_share) {
+
+
 
         } else if (id == R.id.nav_send) {
 
